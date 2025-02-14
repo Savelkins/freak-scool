@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage";
 
-import CoursesPage from "./pages/coursesPage";
-import NotFoundPage from "./pages/notFoundPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import styles from "./App.module.scss";
 
 import SideBar from "./components/SideBar/SideBar";
@@ -13,7 +12,6 @@ const App = () => {
         <SideBar />
         <Routes>
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/courses" element={<CoursesPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

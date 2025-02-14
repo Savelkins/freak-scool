@@ -15,14 +15,6 @@ const SideBar = () => {
               Profile
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/courses"
-              className={({ isActive }) => (isActive ? styles.active : "")}
-            >
-              Courses
-            </NavLink>
-          </li>
         </ul>
       </nav>
     </aside>
