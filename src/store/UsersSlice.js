@@ -1,23 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import database from "../database";
+import database from "../data/database";
 
-export const getAllUsers = createAsyncThunk(
-  "users/getAllUsers",
-  async (_, thunkAPI) => {
+export const getOneUser = createAsyncThunk(
+  "users/getOneUser",
+  async (userId, thunkAPI) => {
     try {
-      return database.users;
+      const user = await database.getUser(userId);
+      return user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-export const getOneUser = createAsyncThunk(
-  "users/getOneUser",
-  async (userId, thunkAPI) => {
+export const loginUser = createAsyncThunk(
+  "users/loginUser",
+  async (username, thunkAPI) => {
     try {
-      const user = database.getUser(userId);
-      if (!user) throw new Error("User not found");
+      const user = database.users.find((user) => user.username === username);
       return user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -26,7 +26,7 @@ export const getOneUser = createAsyncThunk(
 );
 
 const initialState = {
-  users: [],
+  currentUser: null,
   selectedUser: null,
   status: "idle",
   error: null,
@@ -38,17 +38,6 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAllUsers.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.users = action.payload;
-      })
-      .addCase(getAllUsers.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
-      })
       .addCase(getOneUser.pending, (state) => {
         state.status = "loading";
       })
@@ -57,6 +46,18 @@ const usersSlice = createSlice({
         state.selectedUser = action.payload;
       })
       .addCase(getOneUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.currentUser = action.payload;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });

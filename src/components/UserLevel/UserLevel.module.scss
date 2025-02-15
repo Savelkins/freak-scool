@@ -1,0 +1,12 @@
+
+.progress {
+  background-color: #d5ffcb;
+  border-radius: 36px;
+  
+  & > div {
+    background-color: #2db55d;
+    border-radius: 36px;
+    height: 10px;
+   
+  }
+}
