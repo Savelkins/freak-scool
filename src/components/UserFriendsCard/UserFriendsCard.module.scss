@@ -1,0 +1,53 @@
+:root {
+  --index: calc(1vh + 1vw);
+}
+.friends-card {
+  width: calc(var(--index) * 8.5);
+  & > p {
+    margin: 0;
+    padding: 0;
+    font-size: calc(var(--index) * 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(var(--index) * 1.6);
+    color: #9bb8ff;
+    background-color: #cfddff;
+    border-top-left-radius: calc(var(--index) * 0.17);
+    border-top-right-radius: calc(var(--index) * 0.17);
+    margin-bottom: calc(var(--index) * 0.34);
+  }
+  .friend-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 calc(var(--index) * 0.17);
+    margin-bottom: calc(var(--index) * 0.4);
+    & > button {
+      transition: color 0.3s, background-color 0.3s;
+      font-size: calc(var(--index) * 0.5);
+      color: #9bb8ff;
+      background-color: #cfddff;
+      height: calc(var(--index) * 1.05);
+      width: calc(var(--index) * 5.8);
+      border: none;
+      border-radius: calc(var(--index) * 0.17);
+      cursor: pointer;
+      &:hover {
+        color: #9fbaff;
+        background-color: #b9ceff;
+      }
+    }
+    & > img {
+      height: calc(var(--index) * 1.05);
+      transform: rotate(45deg);
+    }
+  }
+  .friends-container {
+    display: flex;
+    justify-content: center;
+  }
+}

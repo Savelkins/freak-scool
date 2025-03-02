@@ -5,7 +5,7 @@ export const getOneUser = createAsyncThunk(
   "users/getOneUser",
   async (userId, thunkAPI) => {
     try {
-      const user = await database.getUser(userId);
+      const user = database.getUser(userId);
       return user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -25,9 +25,30 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const getUserFriends = createAsyncThunk(
+  "users/getUserFriends",
+  async (_, thunkAPI) => {
+    try {
+      const { currentUser } = thunkAPI.getState().users;
+
+      if (!currentUser) {
+        throw new Error("Пользователь не найден");
+      }
+
+      const friends = database.users.filter((user) =>
+        currentUser.friends.includes(user.id)
+      );
+
+      return friends;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 const initialState = {
   currentUser: null,
   selectedUser: null,
+  friends: [],
   status: "idle",
   error: null,
 };
@@ -58,6 +79,18 @@ const usersSlice = createSlice({
         state.currentUser = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(getUserFriends.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(getUserFriends.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.friends = action.payload;
+      })
+      .addCase(getUserFriends.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });

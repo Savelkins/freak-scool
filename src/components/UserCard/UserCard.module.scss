@@ -1,0 +1,30 @@
+:root {
+  --index: calc(1vh + 1vw);
+}
+.user-card {
+  display: flex;
+  flex-direction: row;
+  width: calc(var(--index) * 10.5);
+  height: calc(var(--index) * 2.7);
+  padding: calc(var(--index) * 0.85);
+  .avatar-container {
+    display: flex;
+    align-items: center;
+    margin-right: calc(var(--index) * 0.7);
+    & > img {
+      border-radius: 6px;
+      width: calc(var(--index) * 2.7);
+      height: calc(var(--index) * 2.7);
+    }
+  }
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    & > p {
+      padding: 0;
+      margin: 0;
+      font-size: calc(var(--index) * 0.8);
+    }
+  }
+}

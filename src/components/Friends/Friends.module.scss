@@ -1,0 +1,50 @@
+:root {
+  --index: calc(1vh + 1vw);
+}
+.friends {
+  overflow: auto;
+  height: calc(var(--index) * 8.9);
+  width: calc(var(--index) * 8.2);
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(var(--index) * 7.9);
+    padding: calc(var(--index) * 0.17);
+    margin-bottom: calc(var(--index) * 0.17);
+    border-radius: calc(var(--index) * 0.17);
+    height: calc(var(--index) * 1.3);
+    background-color: #f8f8f8;
+    & > p {
+      font-size: calc(var(--index) * 0.4);
+      color: #ff070757;
+      padding: 0;
+      margin: 0;
+      margin-right: calc(var(--index) * 0.34);
+      cursor: pointer;
+      user-select: none;
+    }
+    & > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      & > p {
+        padding: 0;
+        margin: 0;
+        font-size: calc(var(--index) * 0.55);
+        color: #d9d9d9;
+      }
+      & > img {
+        width: calc(var(--index) * 1);
+        height: calc(var(--index) * 1);
+        margin-right: calc(var(--index) * 0.5);
+        border-radius: calc(var(--index) * 0.1);
+      }
+    }
+  }
+}

@@ -1,28 +1,21 @@
 import { useState, useEffect } from "react";
 import styles from "./UserLevel.module.scss";
+import { PropTypes } from "prop-types";
+import CoinIndicator from "../CoinIndicator/CoinIndicator";
 
-const LevelProgress = (props) => {
-  const { user } = props;
-
-  // Начальные значения для уровня и прогресса
+const UserLevel = ({ user }) => {
   const [level, setLevel] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  // Вычисляем уровень на основе XP и прогресс
   const calculateLevelAndProgress = (xp) => {
     let currentLevel = 0;
-    let xpToNextLevel = 1; // Стартовое количество XP для уровня
-
-    // Находим уровень и оставшийся прогресс
+    let xpToNextLevel = 1;
     while (xp >= xpToNextLevel) {
       xp -= xpToNextLevel;
       currentLevel++;
-      xpToNextLevel *= 4; // XP увеличивается с каждым уровнем
+      xpToNextLevel *= 4;
     }
-
-    // Вычисляем прогресс для текущего уровня
     const progressPercent = (xp / xpToNextLevel) * 100;
-
     return { currentLevel, progressPercent };
   };
 
@@ -35,8 +28,12 @@ const LevelProgress = (props) => {
   }, [user.xp]);
 
   return (
-    <div>
-      <div>{`Lvl: ${level}`}</div>
+    <div className={styles["user-level"]}>
+      <div className={styles["level-coins"]}>
+        <p>{`Lvl: ${level}`}</p>
+        <CoinIndicator user={user} />
+      </div>
+
       <div className={styles.progress}>
         <div style={{ width: `${progress}%` }}></div>
       </div>
@@ -44,4 +41,10 @@ const LevelProgress = (props) => {
   );
 };
 
-export default LevelProgress;
+UserLevel.propTypes = {
+  user: PropTypes.shape({
+    xp: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+export default UserLevel;

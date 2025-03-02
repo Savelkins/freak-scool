@@ -1,12 +1,27 @@
+:root {
+  --index: calc(1vh + 1vw);
+}
+.user-level {
+  .level-coins {
+    display: flex;
+    flex-direction: row;
 
-.progress {
-  background-color: #d5ffcb;
-  border-radius: 36px;
-  
-  & > div {
-    background-color: #2db55d;
-    border-radius: 36px;
-    height: 10px;
-   
+    & > p {
+      font-size: calc(var(--index) * 0.53);
+      margin: 0;
+      margin-right: calc(var(--index) * 0.5);
+    }
+  }
+
+  .progress {
+    background-color: #d5ffcb;
+    border-radius: calc(var(--index) * 1.2);
+    width: calc(var(--index) * 5.2);
+    & > div {
+      margin-top: calc(var(--index) * 0.35);
+      background-color: #2db55d;
+      border-radius: calc(var(--index) * 1.2);
+      height: calc(var(--index) * 0.4);
+    }
   }
 }

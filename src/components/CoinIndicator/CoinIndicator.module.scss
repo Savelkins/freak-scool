@@ -1,0 +1,22 @@
+:root {
+  --index: calc(1vh + 1vw);
+}
+
+.coin-indicator {
+  display: flex;
+  align-items: center;
+
+  & > p {
+    margin: 0;
+    font-size: calc(var(--index) * 0.53); 
+    color: #f49944;
+  }
+
+  & > img {
+    height: calc(var(--index) * 0.74);
+    width: calc(var(--index) * 0.74); 
+    margin-right: calc(
+      var(--index) * 0.14
+    ); 
+  }
+}
